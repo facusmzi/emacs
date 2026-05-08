@@ -18,8 +18,7 @@
 (savehist-mode 1)
 
 ;; Desactivar números de línea en ciertos modos
-(dolist (mode '(org-mode-hook
-                term-mode-hook
+(dolist (mode '(term-mode-hook
                 shell-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
@@ -111,8 +110,7 @@
   ("C-c p" . projectile-command-map)
   :init
   (when (file-directory-p "~/projects")
-    (setq projectile-project-search-path '(("~/projects/" . 2))))
-  (setq projectile-switch-project-action #'projectile-dired))
+    (setq projectile-project-search-path '(("~/projects/" . 2)))))
 
 (use-package counsel-projectile
   :after projectile
@@ -125,13 +123,8 @@
 
 ;; org-mode config
 
-(defun efs/org-mode-setup ()
-  (org-indent-mode)
-  (variable-pitch-mode 1)
-  (visual-line-mode 1))
-
 (use-package org
-  :hook (org-mode . efs/org-mode-setup))
+  :hook (org-mode . org-indent-mode))
 
 (use-package org-modern
   :after org
