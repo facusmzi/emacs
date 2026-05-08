@@ -123,3 +123,16 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
+;; org-mode config
+
+(defun efs/org-mode-setup ()
+  (org-indent-mode)
+  (variable-pitch-mode 1)
+  (visual-line-mode 1))
+
+(use-package org
+  :hook (org-mode . efs/org-mode-setup))
+
+(use-package org-modern
+  :after org
+  :hook (org-mode . org-modern-mode))
