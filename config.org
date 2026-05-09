@@ -91,7 +91,8 @@
 
 ** Windows
 #+begin_src emacs-lisp
-(setq default-directory "C:/Users/agitr/Documents/projects/")
+(setq default-directory
+      (expand-file-name "Documents/projects/" (getenv "USERPROFILE")))
 
 (defun user/open-emacs-config ()
   (interactive)
@@ -262,9 +263,12 @@
   ("C-c p" . projectile-command-map)
 
   :init
-  (when (file-directory-p "C:/Users/agitr/Documents/projects/")
+  (let ((projects-dir
+       (expand-file-name "Documents/projects/"
+                         (getenv "USERPROFILE"))))
+  (when (file-directory-p projects-dir)
     (setq projectile-project-search-path
-          '(("C:/Users/agitr/Documents/projects/" . 2)))))
+          `((,projects-dir . 2)))))
 
 (use-package counsel-projectile
   :after projectile
