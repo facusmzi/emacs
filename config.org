@@ -264,11 +264,11 @@
 
   :init
   (let ((projects-dir
-       (expand-file-name "Documents/projects/"
-                         (getenv "USERPROFILE"))))
-  (when (file-directory-p projects-dir)
-    (setq projectile-project-search-path
-          `((,projects-dir . 2)))))
+         (expand-file-name "Documents/projects/"
+                           (getenv "USERPROFILE"))))
+    (when (file-directory-p projects-dir)
+      (setq projectile-project-search-path
+            `((,projects-dir . 2))))))
 
 (use-package counsel-projectile
   :after projectile
